@@ -20,6 +20,6 @@ Future setPatient(Patient patient) async {
     return true;
   } else {
     print('Error ${respuesta.statusCode} ${respuesta.headers.toString()}');
+    return false;
   }
-  return false;
 }

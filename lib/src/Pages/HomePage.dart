@@ -35,27 +35,43 @@ class _HomePageState extends State<HomePage> {
                   RaisedButton(
                     color: Colors.blueAccent,
                     textColor: Colors.white,
-                    onPressed: () {
+                    onPressed: () async {
                       if (patientModel.isComplet()) {
-                        setPatient(patientModel);
+                        final goodRequest = await setPatient(patientModel);
                         showDialog(
                             context: context,
                             barrierDismissible: true,
                             builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text("Completado con exito"),
-                                content:
-                                    Text('Se agrego con exito al paciente'),
-                                actions: <Widget>[
-                                  FlatButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        Navigator.of(context)
-                                            .pushReplacementNamed('/home');
-                                      },
-                                      child: Text("Ok"))
-                                ],
-                              );
+                              if (goodRequest == true) {
+                                return AlertDialog(
+                                  title: Text("Completado con exito"),
+                                  content:
+                                      Text('Se agrego con exito al paciente'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          Navigator.of(context)
+                                              .pushReplacementNamed('/home');
+                                        },
+                                        child: Text("Ok"))
+                                  ],
+                                );
+                              } else {
+                                return AlertDialog(
+                                  title: Text(
+                                      "Nuestros servidores estan en mantenimiento"),
+                                  content: Text(
+                                      'Porfavor intente más tarder y si no funciona reporte al personal de administración'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text("Ok"))
+                                  ],
+                                );
+                              }
                             });
                       } else {
                         showDialog(
