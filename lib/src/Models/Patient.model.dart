@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Patient {
   // * Datos generales
   String _nombre;
@@ -92,14 +94,14 @@ class Patient {
     Map<String, dynamic> jsonPatient = {
       "name": _nombre,
       "gender": _genero,
-      "age": _edad,
-      "allergies": _alergias,
+      "allergies": _alergias.toString(),
       "bloodType": _tipoSange,
-      "height": _estatura,
-      "weight": _peso,
+      "height": _estatura.toString(),
+      "weight": _peso.toString(),
       "address": _ciudad,
-      "telefono": _telefono,
-      "status": _estado
+      "telefono": _telefono.toString(),
+      "status": _estado,
+      "symptoms": _sintomas.toString()
     };
     return jsonPatient;
   }
